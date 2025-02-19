@@ -13,13 +13,11 @@ def predict(image_batch):
     warnings.filterwarnings('ignore')
     torch.set_num_threads(1)
     label_list = []
+    processor = ViTImageProcessor.from_pretrained("google/vit-base-patch16-224")
+    model = ViTForImageClassification.from_pretrained("google/vit-base-patch16-224")
     for image in image_batch:
         try:
             img = Image.open(image)
-
-            processor = ViTImageProcessor.from_pretrained("google/vit-base-patch16-224")
-            model = ViTForImageClassification.from_pretrained("google/vit-base-patch16-224")
-
             inputs = processor(images=img, return_tensors="pt")
 
             outputs = model(**inputs)
