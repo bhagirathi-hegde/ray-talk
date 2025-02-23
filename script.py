@@ -8,6 +8,7 @@ from PIL import Image
 from transformers import ViTForImageClassification, ViTImageProcessor
 
 DATA_FOLDER = "data/"
+NUM_IMAGES = 300
 
 def predict(image_batch):
     warnings.filterwarnings('ignore')
@@ -31,7 +32,7 @@ def predict(image_batch):
 
 
 if __name__ == "__main__":
-    images = glob.glob(f"{DATA_FOLDER}*.JPEG")[:300]
+    images = glob.glob(f"{DATA_FOLDER}*.JPEG")[:NUM_IMAGES]
     # Split the list into chunks of 10 images each
     image_batches = [images[i:i + 15] for i in range(0, len(images), 15)]
 
